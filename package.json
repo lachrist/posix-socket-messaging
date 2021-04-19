@@ -1,7 +1,7 @@
 {
   "name": "posix-socket-messaging",
   "description": "Simple messaging protocol for the posix-socket module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": {
     "name": "Laurent Christophe",
     "email": "lachrist@vub.ac.be"
@@ -22,7 +22,7 @@
   ],
   "devDependencies": {
     "c8": "^7.7.1",
-    "net-socket-messaging": "^0.1.1"
+    "net-socket-messaging": "^0.1.5"
   },
   "dependencies": {
     "posix-socket": "^1.0.1"

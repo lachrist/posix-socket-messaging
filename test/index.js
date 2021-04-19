@@ -20,10 +20,10 @@ server.on("connection", (socket) => {
   console.log("Server connection");
   NetSocketMessaging.patch(socket);
   socket.on("message", (message) => {
-    console.log("Server received:", message.length, message.substring(0, 10), "...");
-    message = "y".repeat(128*2**20);
+    console.log("Server received:", message.length, message.substring(0, 10));
+    message = message + message;
     socket.send(message);
-    console.log("Server sent:", message.length, message.substring(0, 10), "...");
+    console.log("Server sent:", message.length, message.substring(0, 10));
     server.close();
   });
   socket.on("error", () => {

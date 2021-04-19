@@ -25,20 +25,19 @@ Assert.throws(
   () => PosixSocketMessaging.send(sockfd, "x".repeat(PosixSocketMessaging.getMaxByteLength() + 1)),
   /^Error: The message length is too large/);
 
-console.log("Client sending...");
+const test = (request) => {
+  console.log("Client sending...");
+  PosixSocketMessaging.send(sockfd, request);
+  console.log("Client sent:", request.length, request.substring(0, 10), "...");
+  console.log("Client receiving...");
+  const response = PosixSocketMessaging.receive(sockfd);
+  Assert.equal(2 * request.length, response.length);
+  console.log("Client received:", response.length, response.substring(0, 10), "...");
+};
 
-let message = "x".repeat(64*2**10);
-
-PosixSocketMessaging.send(sockfd, message);
-
-console.log("Client sent:", message.length, message.substring(0, 10), "...");
-
-console.log("Client receiving...");
-
-message = PosixSocketMessaging.receive(sockfd);
-
-console.log("Client received:", message.length, message.substring(0, 10), "...");
+test("foo");
+test("barqux");
+test("x".repeat(64*2**10));
 
 console.log("Client closing...");
-
 console.log("Client closed:", PosixSocket.close(sockfd));
